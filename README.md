@@ -1,14 +1,20 @@
-# Welcome to your CDK TypeScript project
+# Deploy CDK
 
-This is a blank project for CDK development with TypeScript.
+State: Working
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Prerequisites
 
-## Useful commands
+1. Create a [GitHub access token](https://github.com/settings/tokens/new)
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+2. Add GitHub token secret to SSM using the AWS CLI:
+
+```
+aws ssm put-parameter --name "/AssetDeploy/insecure_github_token" --value "secret" --type String --overwrite
+```
+
+> **Note:** This stores the API token key in plaintext inside AWS SSM, which is NOT recommended if you have multiple users with console or API access to your AWS account. Consider using AWS Secrets Manager.
+
+## Instructions
+
+1. `cdk bootstrap`
+2. `cdk deploy`
